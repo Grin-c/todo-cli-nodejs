@@ -25,7 +25,7 @@ const saveJson = (path, data) => fs.writeFileSync(path, JSON.stringify(data, nul
 function showTodo(json) {
     const table = new Table({
         head: [chalk.blue.bold("Posição"), chalk.blue.bold("Todo"), chalk.blue.bold("Prioridade"), chalk.blue.bold("Descrição"), chalk.blue.bold("Pendente")],
-        colWidths: [15, 15, 15, 25, 15]
+        colWidths: [15, 15, 15, 35, 15]
     })
     json.map( (todo, index) => { 
         table.push([index, todo.title, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
@@ -80,11 +80,13 @@ program
     .action( (pos, desc) => {
         const json = getJson(todoPath);
         json[pos].desc = desc;
+        let tamanho =  () => {
+            console.log()
+        }
         saveJson(todoPath, json);
         console.log(chalk.green.bold("Descrição alterada"));
         showTodo(json);
     })
-
 
 program
     .command("do <pos>")

@@ -1,6 +1,8 @@
 # todo-cli-nodejs
 Todo (CLI) feito em nodejs 😁
 
+**Baseado no tutorial da [Medium]("https://medium.com/henriquekuwai/criando-sua-cli-com-node-js-d6dee7d03110")**
+
 ## Recursos
 
 * Adicione tarefas 
