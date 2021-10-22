@@ -25,10 +25,10 @@ const saveJson = (path, data) => fs.writeFileSync(path, JSON.stringify(data, nul
 function showTodo(json) {
     const table = new Table({
         head: [chalk.blue.bold("Posição"), chalk.blue.bold("Todo"), chalk.blue.bold("Prioridade"), chalk.blue.bold("Descrição"), chalk.blue.bold("Pendente")],
-        colWidths: [15, 15, 15, 35, 15]
+        colWidths: [15, 35, 15, 35, 15]
     })
     json.map( (todo, index) => { 
-        table.push([index, todo.title, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
+        table.push([chalk.yellow.bold(index), todo.title, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
     })
     console.log(table.toString());
 }
@@ -36,13 +36,13 @@ function showTodo(json) {
 program
     .command("add <to-do>")
     .description("Adiciona um to-do")
-    .option("-p, --prioridade <prioridade>, Prioridade do to-do")
-    .action( (todo, opt) => {
+    .option("-d, --desc <pos> <descrição>, Descrição do to-do")
+    .action( (todo, desc) => {
         const json = getJson(todoPath);
 
-        const optionString = String(opt['prioridade']);
+        const optionDesc = String(desc['desc']);
 
-        if (optionString == "undefined"){
+        if (optionDesc == "undefined"){
             json.push({
                 title: todo,
                 prd: "Normal",
@@ -52,8 +52,8 @@ program
         } else{
             json.push({
                 title: todo,
-                prd: optionString,
-                desc: "NT",
+                prd: "Normal",
+                desc: optionDesc,
                 done: false
             })
         }
