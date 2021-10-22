@@ -22,36 +22,96 @@ function getJson(path) {
 
 const saveJson = (path, data) => fs.writeFileSync(path, JSON.stringify(data, null, "\t"));
 
-program
-    .command("add <to-do>")
-    .description("Adiciona um to-do")
-    .action( (todo) => {
-        const data = getJson(todoPath);
-        data.push({
-            title: todo,
-            done: false
-        })
-        saveJson(todoPath, data);
-        console.log(`${chalk.green.bold("To-do adicionado")}`);
-    })
-
-function showTodo(data) {
+function showTodo(json) {
     const table = new Table({
-        head: [chalk.blue.bold("Id"), chalk.blue.bold("Todo"), chalk.blue.bold("Pendente")],
-        colWidths: [15, 15, 15]
+        head: [chalk.blue.bold("Posição"), chalk.blue.bold("Todo"), chalk.blue.bold("Prioridade"), chalk.blue.bold("Descrição"), chalk.blue.bold("Pendente")],
+        colWidths: [15, 15, 15, 25, 15]
     })
-    data.map( (todo, index) => { 
-        table.push([index, todo.title, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
+    json.map( (todo, index) => { 
+        table.push([index, todo.title, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
     })
     console.log(table.toString());
 }
 
 program
+    .command("add <to-do>")
+    .description("Adiciona um to-do")
+    .option("-p, --prioridade <prioridade>, Prioridade do to-do")
+    .action( (todo, option) => {
+        const json = getJson(todoPath);
+
+        const optionString = String(option['prioridade']);
+
+        if (optionString != "undefined"){
+            json.push({
+                title: todo,
+                prd: "Normal",
+                desc: " ",
+                done: false
+            })
+        } else{
+            json.push({
+                title: todo,
+                prd: optionString,
+                desc: " ",
+                done: false
+            })
+        }
+       
+        saveJson(todoPath, json);
+        console.log(`${chalk.green.bold("To-do adicionado")}`);
+    })
+
+program
+    .command("prd <pos> <prioridade>")
+    .description("Muda a prioridade do to-do")
+    .action( (todo, desc) => {
+        const json = getJson(todoPath);
+        json[todo].prd = desc;
+        saveJson(todoPath, json);
+        console.log(chalk.green.bold("Prioridade modificada"));
+        showTodo(json);
+    })
+
+
+program
+    .command("do <pos>")
+    .description("Marca o to-do como feito")
+    .action( (todo) => {
+        const json = getJson(todoPath);
+        try{
+            json[todo].done = true;
+            saveJson(todoPath, json);
+        } catch (err){
+            return console.log(chalk.redBright.bold(`Todo não encontrado`))
+        }
+        console.log(chalk.green.bold("Status to-do modificado"));
+        showTodo(json);
+    })
+
+program
+    .command('undo <pos>')
+    .description('Marca o to-do como não feito')
+    .action( (todo) => {
+        const json = getJson(todoPath);
+        try{
+            json[todo].done = false;
+            saveJson(todoPath, json);
+        } catch (err){
+            return console.log(chalk.redBright.bold(`Todo não encontrado`))
+        }
+        console.log(chalk.green.bold("Status todo modificado"));
+        showTodo(json);
+    });
+    
+
+
+program
     .command("list")
     .description("Lista os to-dos")
     .action( () => {
-        const data = getJson(todoPath);
-        showTodo(data);
+        const json = getJson(todoPath);
+        showTodo(json);
     })
 
 program
@@ -63,32 +123,9 @@ program
                 if (err) throw (err);
                 console.log(chalk.green.bold("Todos os to-dos foram limpos"));
             } catch (err){
-                console.log(chalk.red.bold("Não existe to-dos"));
+                console.log(chalk.redBright.bold("Não existe to-dos"));
             }
         })
     })
-
-program
-    .command("do <todo>")
-    .description("Marca o to-do como feito")
-    .action( (todo) => {
-        const data = getJson(todoPath);
-        data[todo].done = true;
-        saveJson(todoPath, data);
-        console.log(chalk.green.bold("Status to-do modificado"));
-        showTodo(data);
-    })
-
-program
-    .command('undo <todo>')
-    .description('Marca o to-do como não feito')
-    .action( (todo) => {
-        const data = getJson(todoPath);
-        data[todo].done = false;
-        saveJson(todoPath, data);
-        console.log(chalk.green.bold("Status todo modificado"));
-        showTodo(data);
-    });
-
 
 program.parse(process.argv);
