@@ -37,39 +37,51 @@ program
     .command("add <to-do>")
     .description("Adiciona um to-do")
     .option("-p, --prioridade <prioridade>, Prioridade do to-do")
-    .action( (todo, option) => {
+    .action( (todo, opt) => {
         const json = getJson(todoPath);
 
-        const optionString = String(option['prioridade']);
+        const optionString = String(opt['prioridade']);
 
-        if (optionString != "undefined"){
+        if (optionString == "undefined"){
             json.push({
                 title: todo,
                 prd: "Normal",
-                desc: " ",
+                desc: "NT",
                 done: false
             })
         } else{
             json.push({
                 title: todo,
                 prd: optionString,
-                desc: " ",
+                desc: "NT",
                 done: false
             })
         }
        
         saveJson(todoPath, json);
         console.log(`${chalk.green.bold("To-do adicionado")}`);
+        showTodo(json)
     })
 
 program
     .command("prd <pos> <prioridade>")
     .description("Muda a prioridade do to-do")
-    .action( (todo, desc) => {
+    .action( (pos, prd) => {
         const json = getJson(todoPath);
-        json[todo].prd = desc;
+        json[pos].prd = prd;
         saveJson(todoPath, json);
         console.log(chalk.green.bold("Prioridade modificada"));
+        showTodo(json);
+    })
+
+program
+    .command("desc <pos> <descrição>")
+    .description("Adiciona uma descrição ao to-do")
+    .action( (pos, desc) => {
+        const json = getJson(todoPath);
+        json[pos].desc = desc;
+        saveJson(todoPath, json);
+        console.log(chalk.green.bold("Descrição alterada"));
         showTodo(json);
     })
 
@@ -77,10 +89,10 @@ program
 program
     .command("do <pos>")
     .description("Marca o to-do como feito")
-    .action( (todo) => {
+    .action( (pos) => {
         const json = getJson(todoPath);
         try{
-            json[todo].done = true;
+            json[pos].done = true;
             saveJson(todoPath, json);
         } catch (err){
             return console.log(chalk.redBright.bold(`Todo não encontrado`))
@@ -92,10 +104,10 @@ program
 program
     .command('undo <pos>')
     .description('Marca o to-do como não feito')
-    .action( (todo) => {
+    .action( (pos) => {
         const json = getJson(todoPath);
         try{
-            json[todo].done = false;
+            json[pos].done = false;
             saveJson(todoPath, json);
         } catch (err){
             return console.log(chalk.redBright.bold(`Todo não encontrado`))
