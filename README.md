@@ -11,6 +11,7 @@ Todo (CLI) feito em nodejs 😁
 
 ## Requisitos
 * nodejs (Alguma versão aí)
+Obs: Na versão 17 funciona 😁
 
 ## Instalação
 1. Instale as Dependências (nodejs, npm)
@@ -26,7 +27,7 @@ Todo (CLI) feito em nodejs 😁
     ```bash
     npm link
     ```
-    Se não funcionar use 
+    Caso não funcione 
     ```bash
     sudo npm link
     ```
