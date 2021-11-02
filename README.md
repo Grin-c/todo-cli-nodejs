@@ -24,7 +24,6 @@ Obs: Na versão 17 funciona 😁
 2. Instale os packages do node     
     ``` bash
     npm install yarn 
-    yarn init
     yarn add commander path fs chalk cli-table inquirer
     ```
 3. Fazer o link para o arquivo
