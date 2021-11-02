@@ -24,7 +24,8 @@ Obs: Na versão 17 funciona 😁
 2. Instale os packages do node     
     ``` bash
     npm install yarn 
-    yarn add commander path fs chalk cli-table
+    yarn init
+    yarn add commander path fs chalk cli-table inquirer
     ```
 3. Fazer o link para o arquivo
     ```bash
@@ -34,8 +35,9 @@ Obs: Na versão 17 funciona 😁
     ```bash
     sudo npm link
     ```
-     
 
+## Observação
+Não sei como faz para desinstalar 😁
  
     
 
