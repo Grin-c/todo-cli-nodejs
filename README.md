@@ -30,13 +30,23 @@ Obs: Na versão 17 funciona 😁
     ```bash
     npm link
     ```
-    Caso não funcione 
+    **Caso não funcione:** 
     ```bash
     sudo npm link
     ```
 
-## Observação
-Não sei como faz para desinstalar 😁
- 
+## Desinstalação
+1. Entre no diretório do programa e desfaça o link
+    ``` bash
+    npm unlink
+    ```
+    **Caso não funcione:** 
+    ``` bash
+    sudo npm unlink
+    ```
+2. Exclua o diretório do programa
+    ``` bash
+    rm -rf todo-cli-nodejs
+    ```
     
 
