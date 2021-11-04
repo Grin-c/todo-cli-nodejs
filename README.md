@@ -42,7 +42,11 @@ Obs: Na versão 17 funciona 😁
     ```
     **Caso não funcione:** 
     ``` bash
-    sudo npm unlink
+    npm unlink -g
+    ```
+    Ou:
+    ``` bash
+    sudo npm unlink -g
     ```
 2. Exclua o diretório do programa
     ``` bash
