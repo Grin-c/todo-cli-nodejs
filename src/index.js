@@ -60,7 +60,7 @@ program
         saveJson(todoPath, json);
         console.log(`${chalk.green.bold("To-do adicionado")}`);
         showTodo(json);
-    })
+    });
 
 program
     .command("prd <pos> <prioridade>")
@@ -163,7 +163,7 @@ program
 
 program
     .command("clean")
-    .description("Limpa TO-DOS os todos")
+    .description("Limpa todos os to-dos")
     .action( () => {
         fs.unlink(todoPath, (err) => {
             try{

@@ -7,9 +7,10 @@ Todo (CLI) feito em nodejs 😁
 
 * Adicione tarefas 
 * Escolha a prioridade delas
+* Mude os to-dos
 * Marque como feita ou desmarque e deixe como pendente
 * Liste as tarefas
-* Limpe todas de uma vez
+* Limpe todos de uma vez
 
 ## Requisitos
 * nodejs (Alguma versão aí)
