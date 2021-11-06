@@ -40,7 +40,8 @@ function showTodo(json) {
         colWidths: [15, 35, 15, 35, 15]
     });
     json.map( (todo, index) => { 
-        table.push([chalk.yellow.bold(index), todo.todo, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
+        try{table.push([chalk.yellow.bold(index), todo.todo, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);}
+        catch (err){}
     });
     console.log(table.toString());
 }
@@ -193,18 +194,23 @@ program
         showTodo(json);
     });
 
+
+function cleanTodos(m1, m2){
+        fs.unlink(todoPath, (err) => {
+        try{
+            if (err) throw (err);
+            console.log(chalk.green.bold(m1));
+        } catch (err){
+            console.log(chalk.redBright.bold(m2));
+        }
+    });
+}
+
 program
     .command("clean")
     .description("Limpa todos os to-dos")
     .action( () => {
-        fs.unlink(todoPath, (err) => {
-            try{
-                if (err) throw (err);
-                console.log(chalk.green.bold("Todos os to-dos foram limpos"));
-            } catch (err){
-                console.log(chalk.redBright.bold("Não existe to-dos"));
-            }
-        });
+        cleanTodos("Todos os to-dos foram limpos", "Não existe to-dos");
     });
 
 program 
