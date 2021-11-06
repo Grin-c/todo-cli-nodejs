@@ -19,6 +19,6 @@
     "yarn": "^1.22.17"
   },
   "bin": {
-    "todo": "src/index.js"
+    "td": "src/index.js"
   }
 }

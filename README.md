@@ -12,27 +12,52 @@ Todo (CLI) feito em nodejs 😁
 * Liste as tarefas
 * Limpe todos de uma vez
 
-## Requisitos
-* nodejs (Alguma versão aí)
+## Comandos
 
-Obs: Na versão 17 funciona 😁
+* td add (todo) #Adiciona um todo
+<br> (todo) = Atividade
+* td prd (pos) (prd) #Muda a prioridade do todo
+<br> (pos) = Posição
+<br> (prd) = Prioridade
+* td desc (pos) (desc) #Muda a descrição do todo
+<br> (desc) = Descrição
+* td mud (pos) #Muda o todo
+* td do (pos) #Marca o todo como feito
+* td undo (pos) #Marca o todo como pendente
+* td list #Lista os todos
+* td clean #Limpa os todos
+
+
+
+## Requisitos
+* nodejs (Alguma versão aí) 
+* git
+
+Obs: O node na versão 17 funciona 😁
 
 ## Instalação
-1. Instale as Dependências (nodejs, npm)
+
+1. Clone o repositório:
+    ``` bash
+    git clone https://github.com/Rofen1/todo-cli-nodejs.git
+    cd todo-cli-nodejs
+    ```
+
+2. Instale as Dependências (nodejs, npm)
 
     **Siga o passo a passo da sua distribuição**
 
-2. Instale os packages do node     
+3. Instale os packages do node     
     ``` bash
     npm install --global yarn 
     yarn add commander path fs chalk cli-table inquirer
     ```
-3. Fazer o link para o arquivo
-    ```bash
+4. Fazer o link para o arquivo
+    ``` bash
     npm link
     ```
     **Caso não funcione:** 
-    ```bash
+    ``` bash
     sudo npm link
     ```
 
