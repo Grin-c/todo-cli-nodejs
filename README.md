@@ -16,8 +16,9 @@ Todo (CLI) feito em nodejs 😁
 
 * td add (todo) #Adiciona um todo
 <br> (todo) = Atividade
-* td prd (pos) (prd) #Muda a prioridade do todo
+* td del (pos) #Remove um todo
 <br> (pos) = Posição
+* td prd (pos) (prd) #Muda a prioridade do todo
 <br> (prd) = Prioridade
 * td desc (pos) (desc) #Muda a descrição do todo
 <br> (desc) = Descrição
@@ -27,14 +28,13 @@ Todo (CLI) feito em nodejs 😁
 * td list #Lista os todos
 * td clean #Limpa os todos
 * td criador #Mostra o criador do programa
+* td atl #Mostra as novas atualizações
 
 
 
 ## Requisitos
-* nodejs (Alguma versão aí) 
+* nodejs  
 * git
-
-Obs: O node na versão 17 funciona 😁
 
 ## Instalação
 
@@ -51,7 +51,7 @@ Obs: O node na versão 17 funciona 😁
 3. Instale os packages do node     
     ``` bash
     npm install --global yarn 
-    yarn add commander path fs chalk cli-table inquirer
+    yarn add commander path fs chalk cli-table inquirer figlet
     ```
 4. Fazer o link para o arquivo
     ``` bash
@@ -63,7 +63,7 @@ Obs: O node na versão 17 funciona 😁
     ```
 
 ## Atualização
-Entre na pasta do programa e dê um: 
+Entre na pasta do programa e dê um para ficar atualizado: 
 ``` bash
 git pull
 ```

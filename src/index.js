@@ -6,6 +6,7 @@ const fs = require("fs");
 const package = require("../package.json");
 const chalk = require("chalk");
 const inquirer = require("inquirer");
+const figlet = require("figlet")
 const Table = require("cli-table");
 
 const todoPath = join(__dirname + "/todo", "todos.json");
@@ -71,6 +72,29 @@ program
         console.log(`${chalk.green.bold("To-do adicionado")}`);
         showTodo(json);
     });
+
+program
+    .command("del <pos>")
+    .description("Rmove um to-do específico")
+    .action( (pos) => {
+        const json = getJson(todoPath);
+        let qtdNull = 1;
+        delete json[pos]; 
+        showTodo(json);
+        saveJson(todoPath, json);
+        
+        for (c=0; c < json.length-1; c++){
+            if (json[c] === null){
+                qtdNull += 1;
+            }
+        }
+
+        if (qtdNull == json.length){
+            cleanTodos("","");
+        }
+        console.log(chalk.green.bold("To-do removido"));
+    });
+
 
 program
     .command("prd <pos> <prioridade>")
@@ -160,8 +184,6 @@ program
         console.log(chalk.green.bold("Status todo modificado"));
         showTodo(json);
     });
-    
-
 
 program
     .command("list")
@@ -183,6 +205,22 @@ program
                 console.log(chalk.redBright.bold("Não existe to-dos"));
             }
         });
+    });
+
+program 
+    .command("criador")
+    .description("Mostra o criador do projeto")
+    .action( () => {
+        console.log(chalk.blue.bold("O criador é Rofen1:" + chalk.red.bold(" https://github.com/Rofen1 ") +  "que seguiu o tutorial da Medium:" + chalk.red.bold(" https://medium.com/henriquekuwai/criando-sua-cli-com-node-js-d6dee7d03110 ") + "e adicionou novas funcionalidades ao programa"));
+    });
+
+program
+    .command("atl")
+    .description("Mostra as atualizações que foram feitas")
+    .action( () => {
+        console.log(chalk.green.bold(figlet.textSync("Atualizações")));
+        console.log(chalk.yellow.bold("Adição do comando del (Deleta todos)"));
+        console.log(chalk.yellow.bold("Adição do comando atl (Mostra as novas atualizações"));
     });
 
 program.parse(process.argv);
