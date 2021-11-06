@@ -9,6 +9,16 @@ const inquirer = require("inquirer");
 const Table = require("cli-table");
 
 const todoPath = join(__dirname + "/todo", "todos.json");
+const dir = __dirname + "/todo";
+
+program.version(package.version);
+
+function dirExist(dir){
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+    }
+}
+dirExist(dir);
 
 program.version(package.version);
 
