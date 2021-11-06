@@ -62,6 +62,12 @@ Obs: O node na versão 17 funciona 😁
     sudo npm link
     ```
 
+## Atualização
+Entre na pasta do programa e dê um: 
+``` bash
+git pull
+```
+
 ## Desinstalação
 1. Entre no diretório do programa e desfaça o link
     ``` bash
