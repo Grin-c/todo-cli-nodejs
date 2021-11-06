@@ -226,8 +226,8 @@ program
     .description("Mostra as atualizações que foram feitas")
     .action( () => {
         console.log(chalk.green.bold(figlet.textSync("Atualizações")));
-        console.log(chalk.yellow.bold("Adição do comando del (Deleta todos)"));
-        console.log(chalk.yellow.bold("Adição do comando atl (Mostra as novas atualizações"));
+        console.log(chalk.yellow.bold("Adição do comando del (Deleta um to-do)"));
+        console.log(chalk.yellow.bold("Adição do comando atl (Mostra as novas atualizações)"));
     });
 
 program.parse(process.argv);
