@@ -40,8 +40,9 @@ function showTodo(json) {
         colWidths: [15, 35, 15, 35, 15]
     });
     json.map( (todo, index) => { 
-        try{table.push([chalk.yellow.bold(index), todo.todo, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);}
-        catch (err){}
+        try{
+            table.push([chalk.yellow.bold(index), todo.todo, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
+        } catch (err){}
     });
     console.log(table.toString());
 }
