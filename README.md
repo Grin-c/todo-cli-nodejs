@@ -26,6 +26,7 @@ Todo (CLI) feito em nodejs 😁
 * td undo (pos) #Marca o todo como pendente
 * td list #Lista os todos
 * td clean #Limpa os todos
+* td criador #Mostra o criador do programa
 
 
 
