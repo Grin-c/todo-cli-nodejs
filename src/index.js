@@ -214,13 +214,6 @@ program
         cleanTodos("Todos os to-dos foram limpos", "Não existe to-dos");
     });
 
-program 
-    .command("criador")
-    .description("Mostra o criador do projeto")
-    .action( () => {
-        console.log(chalk.blue.bold("O criador é Rofen1:" + chalk.red.bold(" https://github.com/Rofen1 ") +  "que seguiu o tutorial da Medium:" + chalk.red.bold(" https://medium.com/henriquekuwai/criando-sua-cli-com-node-js-d6dee7d03110 ") + "e adicionou novas funcionalidades ao programa"));
-    });
-
 program
     .command("atl")
     .description("Mostra as atualizações que foram feitas")
