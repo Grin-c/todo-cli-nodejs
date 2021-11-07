@@ -219,7 +219,6 @@ program
     .description("Mostra as atualizações que foram feitas")
     .action( () => {
         console.log(chalk.green.bold(figlet.textSync("Atualizações")));
-        console.log(chalk.yellow.bold("Adição do comando del (Deleta um to-do)"));
         console.log(chalk.yellow.bold("Adição do comando atl (Mostra as novas atualizações)"));
     });
 
