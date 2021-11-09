@@ -36,15 +36,26 @@ const saveJson = (path, data) => fs.writeFileSync(path, JSON.stringify(data, nul
 
 function showTodo(json) {
     const table = new Table({
-        head: [chalk.blue.bold("Posição"), chalk.blue.bold("Todo"), chalk.blue.bold("Prioridade"), chalk.blue.bold("Descrição"), chalk.blue.bold("Pendente")],
-        colWidths: [15, 35, 15, 35, 15]
+        head: [chalk.blue.bold("Posição"), chalk.blue.bold("Todo"), chalk.blue.bold("Descrição"), chalk.blue.bold("Pendente")],
+        colWidths: [9, 18, 35, 11]
     });
     json.map( (todo, index) => { 
         try{
-            table.push([chalk.yellow.bold(index), todo.todo, chalk.yellow.bold(todo.prd), todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
+            table.push([chalk.yellow.bold(index), todo.todo, todo.desc, todo.done ? chalk.green.bold("Concluido") : chalk.yellow.bold("Pendente")]);
         } catch (err){}
     });
     console.log(table.toString());
+}
+
+function cleanTodos(m1, m2){
+        fs.unlink(todoPath, (err) => {
+        try{
+            if (err) throw (err);
+            console.log(chalk.green.bold(m1));
+        } catch (err){
+            console.log(chalk.redBrighat.bold(m2));
+        }
+    });
 }
 
 program
@@ -54,7 +65,7 @@ program
     .action( (todo, desc) => {
         const json = getJson(todoPath);
 
-        if (desc['desc'] === undefined){
+        if (!desc.desc){
             json.push({
                 todo: todo,
                 prd: "Normal",
@@ -76,7 +87,7 @@ program
     });
 
 program
-    .command("del <pos>")
+    .command("rm <pos>")
     .description("Rmove um to-do específico")
     .action( (pos) => {
         const json = getJson(todoPath);
@@ -95,18 +106,6 @@ program
             cleanTodos("","");
         }
         console.log(chalk.green.bold("To-do removido"));
-    });
-
-
-program
-    .command("prd <pos> <prioridade>")
-    .description("Muda a prioridade do to-do")
-    .action( (pos, prd) => {
-        const json = getJson(todoPath);
-        json[pos].prd = prd;
-        saveJson(todoPath, json);
-        console.log(chalk.green.bold("Prioridade modificada"));
-        showTodo(json);
     });
 
 program
@@ -195,18 +194,6 @@ program
         showTodo(json);
     });
 
-
-function cleanTodos(m1, m2){
-        fs.unlink(todoPath, (err) => {
-        try{
-            if (err) throw (err);
-            console.log(chalk.green.bold(m1));
-        } catch (err){
-            console.log(chalk.redBright.bold(m2));
-        }
-    });
-}
-
 program
     .command("clean")
     .description("Limpa todos os to-dos")
@@ -219,7 +206,7 @@ program
     .description("Mostra as atualizações que foram feitas")
     .action( () => {
         console.log(chalk.green.bold(figlet.textSync("Atualizações")));
-        console.log(chalk.yellow.bold("Adição do comando atl (Mostra as novas atualizações)"));
+        console.log(chalk.yellow.bold("Remoção da função de mudar a prioridade"));
     });
 
 program.parse(process.argv);

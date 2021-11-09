@@ -18,8 +18,6 @@ Todo (CLI) feito em nodejs 😁
 <br> (todo) = Atividade
 * td del (pos) #Remove um todo
 <br> (pos) = Posição
-* td prd (pos) (prd) #Muda a prioridade do todo
-<br> (prd) = Prioridade
 * td desc (pos) (desc) #Muda a descrição do todo
 <br> (desc) = Descrição
 * td mud (pos) #Muda o todo
