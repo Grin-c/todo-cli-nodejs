@@ -48,8 +48,7 @@ Todo (CLI) feito em nodejs 😁
 
 3. Instale os packages do node     
     ``` bash
-    npm install --global yarn 
-    yarn add commander path fs chalk@4.1.2 cli-table inquirer figlet
+    npm install
     ```
 4. Fazer o link para o arquivo
     ``` bash
