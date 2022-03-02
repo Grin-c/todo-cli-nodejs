@@ -82,5 +82,4 @@ git pull
     ``` bash
     rm -rf todo-cli-nodejs
     ```
-    
 
